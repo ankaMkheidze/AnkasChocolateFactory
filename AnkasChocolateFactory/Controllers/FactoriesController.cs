@@ -9,11 +9,13 @@ using AnkasChocolateFactory.Data;
 using AnkasChocolateFactory.Contracts;
 using AutoMapper;
 using AnkasChocolateFactory.Models.Factory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnkasChocolateFactory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FactoriesController : ControllerBase
     {
         

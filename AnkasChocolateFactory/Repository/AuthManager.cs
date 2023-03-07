@@ -24,10 +24,10 @@ namespace AnkasChocolateFactory.Repository
 
         public async Task<AuthResponseDto> Login(LoginDto loginDto)
         {
-            bool isValidUser = false;
+           
             
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            isValidUser = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+            bool isValidUser = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
            if(user == null || isValidUser == false)
             {
@@ -80,10 +80,10 @@ namespace AnkasChocolateFactory.Repository
             .Union(userClaims).Union(roleClaims);
 
             var token = new JwtSecurityToken(
-                issuer : _configuration["JwtSettings: Issuer"],
-                audience : _configuration["JwtSettings: Audience"],
+                issuer : _configuration["JwtSettings:Issuer"],
+                audience : _configuration["JwtSettings:Audience"],
                 claims : claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings: DurationInMinutes"])),
+                expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
                 signingCredentials : cridentials
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
